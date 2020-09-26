@@ -94,3 +94,27 @@ pub fn wasm_object_array(id_name: &str, val: &JsValue) -> JsValue {
 
     JsValue::from_str( &s_elm )
 }
+#[wasm_bindgen]
+pub fn wasm_test_array(id_name: &str, val: &JsValue) -> JsValue {
+    let deserialized: Vec<TaskItem> = val.into_serde().unwrap();
+    let mut s_elm : String = String::new();
+    for row in &deserialized {
+//        console::log_1(&JsValue::from_str( &row.title ));
+        let s = format!("
+        <div class='div_post_row_wrap'>
+            <p class='p_title mb-0'>{} , <span>ID :{}</span>
+            </p>
+            <hr class='hr_ex1 mt-1 mb-1'>    
+        </div>" , &row.title , &row.id );
+        s_elm.push_str( &s );    
+    }    
+
+    JsValue::from_str( &s_elm )
+}
+#[wasm_bindgen]
+pub fn wasm_test_convert(id_name: &str, val: &JsValue) -> JsValue {
+    let deserialized: Vec<TaskItem> = val.into_serde().unwrap();
+    let mut s_elm : String = String::new();
+    
+    JsValue::from_str( &s_elm )
+}
